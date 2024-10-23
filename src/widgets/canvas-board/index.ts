@@ -1,1 +1,1 @@
-export { CanvasBoard } from "./CanvasBoard";
+export { CanvasBoard } from "./ui/CanvasBoard";

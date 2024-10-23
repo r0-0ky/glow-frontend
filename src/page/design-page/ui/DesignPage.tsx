@@ -1,8 +1,9 @@
-'use client'
+"use client";
 
 import { CanvasBoard } from "@/src/widgets/canvas-board"
 import classes from './styles.module.scss';
 import cn from 'classnames';
+import { ToolsBar } from "@/src/widgets/tools-bar";
 
 export const DesignPage: React.FC = () => {
   
@@ -11,7 +12,10 @@ export const DesignPage: React.FC = () => {
       <aside className={classes.leftSide}>
 
       </aside>
-      <CanvasBoard />
+      <section className={cn(classes.paintZoneContainer)}>
+        <CanvasBoard />
+        <ToolsBar styles={{position: 'absolute', bottom: 20, right: '50%', transform: 'translateX(50%)'}} />
+      </section>
 
     </div>
   )

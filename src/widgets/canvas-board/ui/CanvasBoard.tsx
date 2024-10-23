@@ -1,6 +1,8 @@
+"use client";
+
 import { KonvaEventObject, Node, NodeConfig } from 'konva/lib/Node';
 import { useRef, useState } from 'react';
-import { Layer, Rect, Circle, Stage, StageProps } from 'react-konva';
+import { Layer, Rect, Circle, Stage } from 'react-konva';
 
 
 export const CanvasBoard: React.FC = () => {
@@ -72,7 +74,7 @@ export const CanvasBoard: React.FC = () => {
   };
 
   return (
-    <Stage ref={stageRef} width={4000} height={4000} onWheel={handleWheel} scaleX={stage.scale} scaleY={stage.scale} x={stage.x} y={stage.y} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp}>
+    <Stage ref={stageRef} width={1000} height={1000} onWheel={handleWheel} scaleX={stage.scale} scaleY={stage.scale} x={stage.x} y={stage.y} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp}>
       <Layer>
         <Rect width={50} height={50} fill="red" />
         <Circle x={200} y={200} stroke="black" radius={50} />
