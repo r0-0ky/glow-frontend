@@ -1,0 +1,91 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 4px;
+  position: relative;
+  padding: 0 10px;
+}
+
+.defaultButton {
+  width: 32px;
+  height: 32px;
+  border-radius: 3px;
+  background-color: transparent;
+}
+
+.arrowButton {
+  outline: none;
+  width: 15px;
+  height: 32px;
+  background: url(./images/arrow.svg) center / contain no-repeat;
+  border: 3px solid transparent;
+  border-radius: 3px;
+}
+
+.arrowButton:hover {
+  background-color: #ececec;
+  border: 3px solid #ececec;
+}
+
+.dropdown {
+  z-index: 10;
+  width: max-content;
+  border: 2px solid #202020;
+  position: absolute;
+  bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  left: 0;
+  background: white;
+  padding: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+.dropdown:first-of-type {
+  left: -2px
+}
+
+.dropdownWrapper {
+  border-radius: 4px;
+  gap: 5px;
+  padding: 3px 7px;
+  display: flex;
+  align-items: center;
+} 
+
+.dropdownWrapper:hover {
+  background: #FF5C00;
+}
+
+.dropdownIcon {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+}
+
+.dropdownLabel {
+  white-space: nowrap;
+  font-size: 14px;
+  color: #202020;
+  font-weight: 600;
+}
+
+.dropdownArrow {
+  display: inline-block;
+  width: 13px;
+  height: 10px;
+  margin-right: 7px;
+  background: url(./images/dropdown-arrow.svg) center / contain no-repeat;
+}
+
+.dropdownArrowHidden {
+  display: inline-block;
+  width: 13px;
+  height: 10px;
+  margin-right: 7px;
+}

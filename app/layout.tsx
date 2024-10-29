@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "@/src/app/styles/globals.css";
+import { ToolsBarStoreProvider } from "@/src/app/providers/tools-bar/tools-bar.provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,7 +29,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ToolsBarStoreProvider>
+          {children}
+        </ToolsBarStoreProvider>
       </body>
     </html>
   );
