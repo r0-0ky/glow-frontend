@@ -23,14 +23,17 @@ export const CanvasBoard: React.FC = () => {
   const [shapes, setShapes] = useState([]);
   const [isDrawing, setIsDrawing] = useState(false);
   const [startPos, setStartPos] = useState(null);
-  const stageRef = useRef(null);
+  const stageRef = useRef<typeof Stage>(null);
   const [isDraggingStage, setIsDraggingStage] = useState(false);
 
   const handleMouseDown = () => {
+    const current = stageRef.current as 
     setIsDrawing(true);
-    const pos = stageRef.current.getPointerPosition();
-    setStartPos(pos);
-    setShapes((prevShapes) => [...prevShapes, { x: pos.x, y: pos.y, width: 0, height: 0 }]);
+    if (current) {
+      const pos = current.getPointerPosition();
+      setStartPos(pos);
+      setShapes((prevShapes) => [...prevShapes, { x: pos.x, y: pos.y, width: 0, height: 0 }]);
+    }
   };
 
   const handleMouseMove = () => {

@@ -1,7 +1,110 @@
-.title {
-  font-weight: 900;
-  font-size: 181px;
-  background: -webkit-linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,229,0,1) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.main {
+  display: flex;
+  flex-direction: column;
+  .info_section {
+    max-width: 1600px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 0 50px;
+    .title {
+      align-self: center;
+      text-transform: uppercase;
+      font-weight: 900;
+      font-size: 181px;
+      background: -webkit-linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,229,0,1) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+      display: inline-block;
+    }
+    .title::after {
+      content: 'Glow';
+      text-transform: uppercase;
+      font-weight: 900;
+      font-size: 181px;
+      background: -webkit-linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,229,0,1) 100%);
+      opacity: 0.63;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: absolute;
+      left: 10px;
+    }
+    .main_subtitle {
+      font-size: 64px;
+      font-weight: 900;
+      max-width: 1000px;
+    }
+    .span {
+      color: #FF5C00;
+    }
+    .frame_container {
+      align-self: flex-end;
+      width: max-content;
+      .frame {
+        background: url(../images/figures.webp) center / cover no-repeat;
+        width: 825px;
+        height: 502px;
+        border: 3px solid #131313;
+        margin: 100px 0;
+      }
+    }
+  }
+  
+  .what_section {
+    max-width: 1600px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 120px 50px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    .what_title {
+      font-weight: 900;
+      font-size: 100px;
+      text-align: center;
+    }
+    .paragraph {
+      margin: 15px 15px;
+      position: relative;
+      border: 3px solid #131313;
+      padding: 10px;
+      font-size: 32px;
+      max-width: 800px;
+      &:nth-of-type(2) {
+        align-self: flex-end;
+      }
+      .paragraph_square {
+        position: absolute;
+        background: white;
+        width: 20px;
+        height: 20px;
+        border: 3px solid #131313;
+        display: inline-block;
+        &:nth-of-type(1) {
+          top: -10px;
+          left: -10px;
+        }
+        &:nth-of-type(2) {
+          top: -10px;
+          right: -10px;
+        }
+        &:nth-of-type(3) {
+          bottom: -10px;
+          left: -10px;
+        }
+        &:nth-of-type(4) {
+          bottom: -10px;
+          right: -10px;
+        }
+      }
+    }
+  }
+
+  .image_section {
+    .image {
+      width: 100%;
+    }
+  }
 }

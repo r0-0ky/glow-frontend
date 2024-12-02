@@ -10,6 +10,7 @@ import { DropdownMenu } from '@/src/shared/ui/dropdown-menu';
 import { itemsType } from './../../../shared/ui/dropdown-menu/types';
 import { useToolsBarStore } from '@/src/app/providers/tools-bar/tools-bar.provider';
 import { useState } from 'react';
+import { ToolsBarProps } from './types';
 
 const items: itemsType[][]  = [
   [
@@ -62,7 +63,7 @@ const items: itemsType[][]  = [
   ],
 ]
 
-export const ToolsBar: React.FC = ({ styles }) => {
+export const ToolsBar: React.FC<ToolsBarProps> = ({ styles }) => {
   const { selectedItem, updateSelectedItem } = useToolsBarStore(state => state)
   const [closeState, setCloseState] = useState(false)
   const handleSelectItem = (value: string) => {
