@@ -27,7 +27,7 @@ export const CanvasBoard: React.FC = () => {
   const [isDraggingStage, setIsDraggingStage] = useState(false);
 
   const handleMouseDown = () => {
-    const current = stageRef.current as 
+    const current = stageRef.current
     setIsDrawing(true);
     if (current) {
       const pos = current.getPointerPosition();
