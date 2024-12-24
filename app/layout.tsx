@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "@/src/app/styles/globals.css";
-import {NextUIProvider} from '@nextui-org/react';
-import { ToolsBarStoreProvider } from "@/src/app/providers/tools-bar/tools-bar.provider";
+import { ThemeProvider, ToolsBarStoreProvider } from "@/src/app/providers";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 
 const inter = localFont({
   src: [
@@ -47,13 +47,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
+        style={{ overflowX: "hidden" }}
         className={`${inter.className}`}
       >
-        <NextUIProvider>
-          <ToolsBarStoreProvider>
-            {children}
-          </ToolsBarStoreProvider>
-        </NextUIProvider>
+        <AntdRegistry>
+          <ThemeProvider>
+            <ToolsBarStoreProvider>
+              {children}
+            </ToolsBarStoreProvider>
+          </ThemeProvider>
+        </AntdRegistry>
       </body>
     </html>
   );
