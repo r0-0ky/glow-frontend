@@ -1,13 +1,13 @@
 'use client';
 
-import { Button, Form, Input, Flex, Space } from "antd";
+import { Button, Form, Input, Flex } from "antd/lib";
 import { FC } from "react";
 import s from './LoginPage.module.scss';
 import Link from "next/link";
 import cn from 'classnames';
 
 export const LoginPage: FC = () => {
-  const onFinish = (values: any) => {
+  const onFinish = (values: unknown) => {
     alert(JSON.stringify(values, null, 4));
   }
 

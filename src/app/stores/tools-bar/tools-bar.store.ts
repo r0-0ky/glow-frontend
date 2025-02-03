@@ -1,13 +1,14 @@
 // src/stores/counter-store.ts
 import { createStore } from 'zustand/vanilla'
 import { ToolsBarStore, ToolsBarState } from './types'
+import { ToolsBarEnum } from '@/src/widgets/tools-bar/ui/types'
 
 export const initToolsBarStore = (): ToolsBarState => {
-  return { selectedItem: 'default-cursor' }
+  return { selectedItem: ToolsBarEnum.DEFAULT_CURSOR }
 }
 
 export const defaultInitState: ToolsBarState = {
-  selectedItem: 'default-cursor',
+  selectedItem: ToolsBarEnum.DEFAULT_CURSOR,
 }
 
 export const createToolsBarStore = (

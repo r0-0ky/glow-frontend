@@ -1,7 +1,7 @@
 'use client';
 
-import { Button, Form, Input, Flex } from "antd";
-import { FC, useEffect } from "react";
+import { Button, Form, Input, Flex } from "antd/lib";
+import { FC } from "react";
 import s from './RegisterPage.module.scss';
 import Link from "next/link";
 import cn from 'classnames';
@@ -9,7 +9,7 @@ import cn from 'classnames';
 export const RegisterPage: FC = () => {
   const [form] = Form.useForm();
   const password = Form.useWatch('password', form);
-  const onFinish = (values: any) => {
+  const onFinish = (values: unknown) => {
     alert(JSON.stringify(values, null, 4));
   }
 

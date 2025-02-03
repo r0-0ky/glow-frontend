@@ -5,8 +5,7 @@ import s from './ProjectCard.module.scss'
 
 export const ProjectCard: FC<ProjectCardProps> = ({
   href,
-  title,
-  image
+  title
 }) => {
   return (
     <article className={s.container}>

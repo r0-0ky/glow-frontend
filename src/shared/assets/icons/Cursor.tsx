@@ -1,4 +1,4 @@
-import { FC, Ref, SVGProps, forwardRef, memo } from 'react';
+import { FC, SVGProps } from 'react';
 
 export const Cursor: FC<{
   fillColor?: string

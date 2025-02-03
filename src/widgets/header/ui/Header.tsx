@@ -5,8 +5,10 @@ import s from './Header.module.scss';
 export const Header: FC = () => {
   return (
     <header className={s.header}>
-      <Link href='/' />
-      <Link href='/profile'>Профиль</Link>
+      <p className={s.title}>Glow <span id='title_back' className={s.title_back}>Glow</span></p>
+      <Link className={s.profile} href='/profile'>
+        <span className={s.profileLogo} />
+      </Link>
     </header>
   )
 }

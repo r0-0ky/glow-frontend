@@ -3,4 +3,47 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
+  height: 60px;
+  border-bottom: 2px solid #131313;
+  .title {
+    position: relative;
+    align-self: center;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 40px;
+    background: -webkit-linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,229,0,1) 100%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    display: inline-block;
+    .title_back {
+      position: absolute;
+      text-transform: uppercase;
+      font-weight: 900;
+      font-size: 40px;
+      background: -webkit-linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,229,0,1) 100%);
+      opacity: 0.63;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: absolute;
+      left: 5px;
+    }
+  }
+  .profile {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,229,0,1) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .profileLogo {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #fff url(../images/avatar.png) center / cover no-repeat;
+      display: block;
+      border: 0.5px solid #131313;
+    }
+  }
 }

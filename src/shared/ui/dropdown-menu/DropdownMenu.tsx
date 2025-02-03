@@ -1,8 +1,7 @@
 import { DropdownMenuProps, itemsType } from "./types"
 import classes from './styles.module.scss';
 import cn from 'classnames';
-import { MouseEventHandler, useEffect, useState } from "react";
-import { ItemType } from "antd/es/menu/interface";
+import { useEffect, useState } from "react";
 
 export const DropdownMenu: React.FC<DropdownMenuProps> = ({ items, selectedItem, handleSelectItem, closeState, handleCloseMenu }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -34,7 +33,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({ items, selectedItem,
       <button onClick={handleOpenMenu} className={cn(classes.arrowButton)} />
       <div className={cn(classes.dropdown, !isOpen && classes.hidden)}>
         {items.map(item => (
-          <button onClick={() => selectMenu(item)} className={cn(classes.dropdownWrapper)}>
+          <button key={item.value} onClick={() => selectMenu(item)} className={cn(classes.dropdownWrapper)}>
             <span className={cn(selectedItemSection.value === item.value ? classes.dropdownArrow : classes.dropdownArrowHidden)} />
             <span className={cn(classes.dropdownIcon)} style={{ background: `url(${item.icon.src}) center / contain no-repeat`}}></span>
             <p className={cn(classes.dropdownLabel)}>{item.label}</p>

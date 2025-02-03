@@ -1,9 +1,11 @@
+import { ToolsBarEnum } from "@/src/widgets/tools-bar/ui/types"
+
 export type ToolsBarState = {
-  selectedItem: string
+  selectedItem: ToolsBarEnum
 }
 
 export type ToolsBarActions = {
-  updateSelectedItem: (state: string) => void
+  updateSelectedItem: (state: ToolsBarEnum) => void
 }
 
 export type ToolsBarStore = ToolsBarState & ToolsBarActions

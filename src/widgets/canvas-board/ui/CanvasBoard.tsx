@@ -1,11 +1,14 @@
 "use client";
 
 import { KonvaEventObject, Node, NodeConfig } from 'konva/lib/Node';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Layer, Rect, Circle, Stage } from 'react-konva';
 import classes from './styles.module.scss';
 import cn from 'classnames';
 import { useToolsBarStore } from '@/src/app/providers/tools-bar/tools-bar.provider';
+import { Stage as StageT } from 'konva/lib/Stage';
+import { Vector2d } from 'konva/lib/types';
+import { ToolsBarEnum } from '../../tools-bar/ui/types';
 
 export const CanvasBoard: React.FC = () => {
   const { selectedItem } = useToolsBarStore(state => state)
@@ -14,34 +17,43 @@ export const CanvasBoard: React.FC = () => {
     x: 0,
     y: 0
   });
-  const divRef = useRef(null)
+  const divRef = useRef<HTMLDivElement>(null)
   const [dimensions, setDimensions] = useState({
     width: 0,
     height: 0
-  })
+  });
+  const padding = 500;
 
-  const [shapes, setShapes] = useState([]);
+  const [shapes, setShapes] = useState<{
+    x?: number;
+    y?: number;
+    width: number;
+    height: number;
+    id: number;
+  }[]>([]);
   const [isDrawing, setIsDrawing] = useState(false);
-  const [startPos, setStartPos] = useState(null);
-  const stageRef = useRef<typeof Stage>(null);
-  const [isDraggingStage, setIsDraggingStage] = useState(false);
+  const [startPos, setStartPos] = useState<Vector2d | null>(null);
+  const stageRef = useRef<StageT>(null);
 
-  const handleMouseDown = () => {
+  const handleMouseDown = useCallback(() => {
+    if (selectedItem !== ToolsBarEnum.RECTANGLE) return
     const current = stageRef.current
     setIsDrawing(true);
     if (current) {
       const pos = current.getPointerPosition();
       setStartPos(pos);
-      setShapes((prevShapes) => [...prevShapes, { x: pos.x, y: pos.y, width: 0, height: 0 }]);
+      setShapes((prevShapes) => [...prevShapes, { id: shapes.length, x: pos?.x, y: pos?.y, width: 0, height: 0 }]);
     }
-  };
+  }, [selectedItem, shapes.length]);
 
-  const handleMouseMove = () => {
+  const handleMouseMove = useCallback(() => {
+    if (selectedItem !== ToolsBarEnum.RECTANGLE) return
     if (!isDrawing || shapes.length === 0) return;
-    const pos = stageRef.current.getPointerPosition();
+    const pos = stageRef?.current?.getPointerPosition();
     setShapes((prevShapes) => {
       const newShapes = [...prevShapes];
       const lastShape = newShapes[newShapes.length - 1];
+      if (!startPos || !pos) return prevShapes;
       return [
         ...newShapes.slice(0, newShapes.length - 1),
         {
@@ -54,7 +66,7 @@ export const CanvasBoard: React.FC = () => {
         },
       ];
     });
-  };
+  }, [selectedItem, isDrawing, startPos, shapes]);
 
   const handleMouseUp = () => {
     setIsDrawing(false);
@@ -82,75 +94,47 @@ export const CanvasBoard: React.FC = () => {
             });
           }
         }
-
       }
     }
   }
 
-  useEffect(() => {
-    if (divRef.current?.offsetHeight && divRef.current?.offsetWidth) {
-      setDimensions({
-        width: divRef.current.offsetWidth,
-        height: divRef.current.offsetHeight
-      })
-    }
-
-    if (selectedItem !== 'hand-cursor') {
-      window.addEventListener('keydown', (e) => {
-        if (e.code === 'Space') {
-          setIsDraggingStage(true)
-        }
-      })
-  
-      window.addEventListener('keyup', (e) => {
-        if (e.code === 'Space') {
-          setIsDraggingStage(false)
-        }
-      })
-    }
-
-    return () => {
-      window.addEventListener('keydown', (e) => {
-        if (e.code === 'Space') {
-          setIsDraggingStage(true)
-        }
-      })
-
-      window.addEventListener('keyup', (e) => {
-        if (e.code === 'Space') {
-          setIsDraggingStage(false)
-        }
-      })
-    }
-  }, [])
-
-  useEffect(() => {
-    if (selectedItem === 'hand-cursor') {
-      setIsDraggingStage(true)
+  const canDrags = useMemo(() => {
+    if (selectedItem === ToolsBarEnum.DEFAULT_CURSOR) {
+      return true
     }
     else {
-      setIsDraggingStage(false)
+      return false
     }
-  }, [selectedItem])
+  },[selectedItem])
+
+  useEffect(() => {
+    setDimensions({
+      width: window.innerWidth + padding * 2,
+      height: window.innerHeight + padding * 2
+    })
+  }, [])
 
   return (
     <div className={cn(classes.wrapper)} ref={divRef}>
-      <Stage draggable={isDraggingStage} ref={stageRef} width={dimensions.width} height={dimensions.height} onWheel={handleWheel} scaleX={stage.scale} scaleY={stage.scale} x={stage.x} y={stage.y} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp}>
-        <Layer>
-          <Rect draggable width={50} height={50} fill="red" />
-          <Circle draggable x={200} y={200} stroke="black" radius={50} />
-          {shapes.map((shape) => (
-            <Rect
-              key={shape.id}
-              x={shape.x}
-              y={shape.y}
-              width={shape.width}
-              height={shape.height}
-              fill="rgba(255, 0, 0, 0.5)" // Example color
-            />
-          ))}
-        </Layer>
-      </Stage>
+      <div className={classes.largeContainer}>
+        <Stage style={{background: '#e0e0e0'}} ref={stageRef} width={dimensions.width} height={dimensions.height} onWheel={handleWheel} scaleX={stage.scale} scaleY={stage.scale} x={stage.x} y={stage.y} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp}>
+          <Layer>
+            <Rect draggable={canDrags} width={50} height={50} fill="red" />
+            <Circle draggable={canDrags} x={200} y={200} stroke="black" radius={50} />
+            {shapes.map((shape) => (
+              <Rect
+                draggable={canDrags}
+                key={shape.id}
+                x={shape.x}
+                y={shape.y}
+                width={shape.width}
+                height={shape.height}
+                fill="rgba(255, 0, 0, 0.5)" // Example color
+              />
+            ))}
+          </Layer>
+        </Stage>
+      </div>
     </div>
   )
 }
