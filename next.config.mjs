@@ -18,8 +18,10 @@ const nextConfig = {
       },
     )
     fileLoaderRule.exclude = /\.svg$/i
-
     return config
+  },
+  experimental: {
+    serverComponentsExternalPackages: ['@napi-rs/canvas']
   }
 };
 
