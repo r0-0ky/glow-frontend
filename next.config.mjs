@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  webpack(config) {
+  webpack(config, { nextRuntime }) {
+    if (nextRuntime === "nodejs") {
+      config.resolve.alias.canvas = false;
+    }
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.('.svg'),
     )
