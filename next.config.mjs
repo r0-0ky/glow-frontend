@@ -21,7 +21,7 @@ const nextConfig = {
     return config
   },
   experimental: {
-    serverComponentsExternalPackages: ['@napi-rs/canvas']
+    serverComponentsExternalPackages: ['canvas']
   }
 };
 
